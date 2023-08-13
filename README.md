@@ -67,7 +67,7 @@ This repository contains several SQL script files that are used to create and po
 
 - `script_star_schema_movie_db.sql`: This script is the combination of the previous scripts compiled into one. 
 
-These script files work in tandem to establish the structure of the data warehouse and populate it with relevant data. By executing these scripts in the correct order, you can set up a functional and efficient environment for querying and analyzing movie-related data.
+These script files work together to establish the structure of the data warehouse and populate it with data. By executing these scripts in the correct order, you can set up a functional and efficient environment for querying and analyzing movie-related data.
 
 
 
