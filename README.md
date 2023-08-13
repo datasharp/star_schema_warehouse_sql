@@ -1,6 +1,6 @@
 # star_schema_warehouse_sql
 
-This repository contains SQL scripts to create a star schema data warehouse for a movie dataset using SQL Server. The star schema design aims to provide a structured and optimized way to analyze and query movie-related data.
+This repository contains SQL scripts to create a star schema data warehouse for a movie dataset using SQL Server. The star schema design aims to provide a structured and optimized way to analyze and query movie-related data. This is because star schema design optimizes for querying the data instead of for inserting and updating. The use case here is that this movie data will be used to gather information, make reports and dashboards, and will not be frequently updated. 
 
 ## Table of Contents
 
