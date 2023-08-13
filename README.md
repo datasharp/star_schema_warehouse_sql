@@ -69,7 +69,7 @@ This repository contains several SQL script files that are used to create and po
 
 These script files work together to establish the structure of the data warehouse and populate it with data. By executing these scripts in the correct order, you can set up a functional and efficient environment for querying and analyzing movie-related data.
 
-
+The dataset being used: https://www.kaggle.com/datasets/PromptCloudHQ/imdb-data
 
 
 
