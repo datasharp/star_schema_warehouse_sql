@@ -46,7 +46,6 @@ The Movie Data Warehouse project focuses on creating a star schema for efficient
 - **Landing Table:**
   - `land_movies`: Landing table containing raw movie data.
 
-For a visual representation of the data model, you can refer to the [PDF data model diagram][((https://github.com/datasharp/star_schema_warehouse_sql/edit/main/README.md#:~:text=Star%20Schema%20%2D-,Movie,-Data%20Set.pdf)).](https://github.com/datasharp/star_schema_warehouse_sql/edit/main/README.md#:~:text=Star_schema_Movie_Data_Set)
 
 ## SQL Files 
 
