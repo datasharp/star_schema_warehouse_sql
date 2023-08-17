@@ -55,7 +55,7 @@ This repository contains several SQL script files that are used to create and po
 
 - `1_stg_map_film.sql`: This script file creates the staging and mapping tables related to films. It facilitates the initial loading and transformation of film data.
 
-- `2_stg_map_actor_assoc.sql`: This script file sets up the staging and mapping tables for actor-film associations. It helps establish relationships between actors and films.
+- `2_creating_populating_actors_staging_mapping_tables.sql`: This script file sets up the staging and mapping tables for actor-film associations. It helps establish relationships between actors and films.
 
 - `3_stg_map_genre_assoc.sql`: Here, you'll find the script for creating staging and mapping tables related to genre-film associations. This step is essential for linking genres and films.
 
