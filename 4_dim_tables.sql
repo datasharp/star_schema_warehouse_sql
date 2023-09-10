@@ -106,22 +106,26 @@ CREATE TABLE map_director(
 
 --TRUNCATE TABLE map_director
 
-INSERT INTO map_director (director)
-SELECT DISTINCT sf.director 
-FROM stg_film sf
-INNER JOIN map_film mf on mf.film_id = sf.film_id     
-WHERE NOT EXISTS (SELECT 1 FROM map_director md WHERE md.director = sf.director)
--- 644 rows
-
 SELECT * FROM map_director
+
+
+INSERT INTO map_director (director)
+SELECT DISTINCT lm.director 
+FROM land_movies lm
+INNER JOIN map_film mf on mf.title = lm.Title
+and mf.film_year = lm.Year
+and mf.director = lm.Director
+WHERE NOT EXISTS (SELECT 1 FROM map_director md WHERE md.director = lm.director)
+-- 644 rows
 
 
 
 INSERT INTO dim_director
-SELECT DISTINCT md.director_id, sf.director
-FROM stg_film sf
-INNER JOIN map_director md ON md.director = sf.director
-WHERE NOT EXISTS (SELECT 1 FROM dim_director dd WHERE md.director = sf.director)
+SELECT DISTINCT md.director_id, lm.director
+FROM land_movies lm
+INNER JOIN map_director md ON md.director = lm.director
+WHERE NOT EXISTS (SELECT 1 FROM dim_director dd WHERE md.director = lm.director)
+
 
 
 SELECT * FROM dim_director
@@ -145,20 +149,21 @@ CREATE TABLE map_year (
 
 
 INSERT INTO map_year (year)
-SELECT DISTINCT sf.film_year 
-FROM stg_film sf
-INNER JOIN map_film mf on mf.film_id = sf.film_id     
-WHERE NOT EXISTS (SELECT 1 FROM map_year md WHERE md.year = sf.film_year)
+SELECT DISTINCT l.Year 
+FROM land_movies l
+INNER JOIN map_film m on m.title = l.Title
+and m.film_year = l.Year
+WHERE NOT EXISTS (SELECT 1 FROM map_year my WHERE my.year = l.Year)
 -- 11 rows
 
 SELECT * FROM map_year
 
 
 INSERT INTO dim_year
-SELECT DISTINCT md.year_id, sf.film_year
-FROM stg_film sf
-INNER JOIN map_year md ON md.year = sf.film_year
-WHERE NOT EXISTS (SELECT 1 FROM dim_year dd WHERE md.year = sf.film_year)
+SELECT DISTINCT md.year_id, l.Year
+FROM land_movies l
+INNER JOIN map_year md ON md.year = l.Year
+WHERE NOT EXISTS (SELECT 1 FROM dim_year dd WHERE md.year = l.Year)
 
 
 SELECT * FROM dim_year
@@ -192,3 +197,11 @@ INNER JOIN map_director md ON md.director = s.director
 INNER JOIN map_year my ON my.year = s.film_year
 INNER JOIN map_film mf ON mf.film_id = s.film_id
 WHERE NOT EXISTS (SELECT 1 FROM fact_film f WHERE f.film_id = mf.film_id and md.director_id = f.director_id and my.year_id = f.year_id)
+
+
+
+
+select case when null = null then 1 else 0 end
+
+
+select case when null is null then 1 else 0 end
