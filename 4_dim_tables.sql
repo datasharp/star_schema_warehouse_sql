@@ -77,9 +77,18 @@ FROM stg_genre_film_assoc s
 WHERE NOT EXISTS (SELECT 1 FROM dim_genre_movie_assoc d WHERE d.genre_id = s.genre_id and d.film_id = s.film_id)
 
 
-
-
 SELECT * FROM dim_genre_movie_assoc
+
+
+CREATE TABLE dim_genre (
+	genre_id INT NOT NULL
+	,genre NVARCHAR(155)
+	,CONSTRAINT PK_dim_genre PRIMARY KEY CLUSTERED (genre_id)
+);
+
+INSERT INTO dim_genre (genre_id, genre)
+SELECT s.genre_id, s.genre FROM stg_genre s
+WHERE NOT EXISTS (SELECT 1 FROM dim_genre d WHERE d.genre_id = s.genre_id)
 
 
 
@@ -108,14 +117,10 @@ CREATE TABLE map_director(
 
 SELECT * FROM map_director
 
-
 INSERT INTO map_director (director)
-SELECT DISTINCT lm.director 
-FROM land_movies lm
-INNER JOIN map_film mf on mf.title = lm.Title
-and mf.film_year = lm.Year
-and mf.director = lm.Director
-WHERE NOT EXISTS (SELECT 1 FROM map_director md WHERE md.director = lm.director)
+SELECT DISTINCT l.director 
+FROM land_movies l
+WHERE NOT EXISTS (SELECT 1 FROM map_director md WHERE md.director = l.director)
 -- 644 rows
 
 
@@ -132,7 +137,7 @@ SELECT * FROM dim_director
 
 
 ------
-
+use movie_db
 
 CREATE TABLE dim_year (
 	date_id INT NOT NULL 
@@ -147,12 +152,9 @@ CREATE TABLE map_year (
 
 
 
-
 INSERT INTO map_year (year)
 SELECT DISTINCT l.Year 
 FROM land_movies l
-INNER JOIN map_film m on m.title = l.Title
-and m.film_year = l.Year
 WHERE NOT EXISTS (SELECT 1 FROM map_year my WHERE my.year = l.Year)
 -- 11 rows
 
@@ -163,10 +165,11 @@ INSERT INTO dim_year
 SELECT DISTINCT md.year_id, l.Year
 FROM land_movies l
 INNER JOIN map_year md ON md.year = l.Year
-WHERE NOT EXISTS (SELECT 1 FROM dim_year dd WHERE md.year = l.Year)
-
+WHERE NOT EXISTS (SELECT 1 FROM dim_year dd WHERE dd.year = l.Year)
 
 SELECT * FROM dim_year
+
+
 
 SELECT * FROM dim_movie
 
@@ -205,3 +208,6 @@ select case when null = null then 1 else 0 end
 
 
 select case when null is null then 1 else 0 end
+
+
+select * from land_movies
